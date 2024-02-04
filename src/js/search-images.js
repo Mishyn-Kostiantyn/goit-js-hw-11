@@ -7,6 +7,7 @@ const ref = {
     containerForLoaderSign: document.querySelector('.loader-container'),
     formForImagesGallery: document.querySelector('.gallery')
 };
+ref.formForInputSearchingParametersForImages.addEventListener('submit', onFormSubmit);
 function showWarningMessage() {
     iziToast.warning({
         color: 'red',
@@ -75,7 +76,7 @@ function renderImageGallery(images) {
     ref.formForImagesGallery.innerHTML = markup;
     lightbox.refresh();
 }
-ref.formForInputSearchingParametersForImages.addEventListener('submit', onFormSubmit);
+
 function onFormSubmit(event) {
     event.preventDefault();
   deleteImageGalleryMarkup();
@@ -91,9 +92,8 @@ function onFormSubmit(event) {
       renderImageGallery(data.hits);
     }
   }).catch(error => { showErrorMessage(error); })
-    ref.formForInputSearchingParametersForImages.reset()
-   
-
+    
+  ref.formForInputSearchingParametersForImages.reset()
 };
 
 
