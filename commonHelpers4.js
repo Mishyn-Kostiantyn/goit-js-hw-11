@@ -1,6 +1,6 @@
-import"./assets/modulepreload-polyfill-3cfb730f.js";import{S as m}from"./assets/vendor-874053e3.js";const r={formForInputSearchingParametersForImages:document.querySelector(".input-form"),containerForLoaderSign:document.querySelector(".loader-container"),formForImagesGallery:document.querySelector(".gallery")};function g(){r.formForImagesGallery.innerHTML=""}function y(e){const a="https://pixabay.com/api/",t="?key=42121047-6dc093e186e55c34fb150394f",i=`&q=${e}`,l="&image-type=photo",o="&orientation=horizontal",s="&safesearch=true",n=a+t+i+l+o+s;return fetch(n).then(c=>c.json())}function p(e){return e.map(({webformatURL:a,largeImageURL:t,tags:i,likes:l,views:o,comments:s,downloads:n})=>`
+import"./assets/modulepreload-polyfill-3cfb730f.js";import{S as g,i as m}from"./assets/vendor-5b791d57.js";const t={formForInputSearchingParametersForImages:document.querySelector(".input-form"),containerForLoaderSign:document.querySelector(".loader-container"),formForImagesGallery:document.querySelector(".gallery")};function u(){m.warning({color:"red",message:"Sorry, there are no images matching your search query. Please try again!",position:"topCenter"})}function h(e){m.error({timeout:3e3,message:`An error: ${e} occurred while processing your request `,position:"topCenter"})}function y(){t.formForImagesGallery.innerHTML=""}function p(e){const a="https://pixabay.com/api/",r="?key=42121047-6dc093e186e55c34fb150394f",i=`&q=${e}`,o="&image-type=photo",s="&orientation=horizontal",n="&safesearch=true",c=a+r+i+o+s+n;return fetch(c).then(l=>{if(!l.ok)throw new Error(l.statusText);return l.json()})}function f(e){return e.map(({webformatURL:a,largeImageURL:r,tags:i,likes:o,views:s,comments:n,downloads:c})=>`
     <li class="gallery-item">
-        <a class="gallery-link" href="${t}">
+        <a class="gallery-link" href="${r}">
           <img
             class="gallery-image"
             src="${a}"
@@ -10,20 +10,20 @@ import"./assets/modulepreload-polyfill-3cfb730f.js";import{S as m}from"./assets/
         <ul class="image-activity">
           <li class="image-activity-item">
             <h4 class="image-activity-type">Likes</h4>
-            <p>${l}</p>
-          </li>
-          <li class="image-activity-item">
-            <h4 class="image-activity-type">Views</h4>
             <p>${o}</p>
           </li>
           <li class="image-activity-item">
-            <h4 class="image-activity-type">Comments</h4>
+            <h4 class="image-activity-type">Views</h4>
             <p>${s}</p>
+          </li>
+          <li class="image-activity-item">
+            <h4 class="image-activity-type">Comments</h4>
+            <p>${n}</p>
             <li class="image-activity-item">
             <h4 class="image-activity-type">Downloads</h4>
-            <p>${n}</p>
+            <p>${c}</p>
           </li>
           </li>
         </ul>
-      </li>`).join("")}function u(e){const a=p(e);r.formForImagesGallery.innerHTML=a,f.refresh()}r.formForInputSearchingParametersForImages.addEventListener("submit",h);function h(e){e.preventDefault(),g();let a=e.target.elements.query.value;console.log(a),y(a).then(t=>{u(t.hits)}),r.formForInputSearchingParametersForImages.reset()}let f=new m(".gallery a",{captionsData:"alt",captionDelay:250});
+      </li>`).join("")}function d(e){const a=f(e);t.formForImagesGallery.innerHTML=a,S.refresh()}t.formForInputSearchingParametersForImages.addEventListener("submit",I);function I(e){e.preventDefault(),y(),t.containerForLoaderSign.classList.remove("hide");let a=e.target.elements.query.value;p(a).then(r=>{r.hits==0?(t.containerForLoaderSign.classList.add("hide"),u()):(t.containerForLoaderSign.classList.add("hide"),d(r.hits))}).catch(r=>{h(r)}),t.formForInputSearchingParametersForImages.reset()}let S=new g(".gallery a",{captionsData:"alt",captionDelay:250});
 //# sourceMappingURL=commonHelpers4.js.map
