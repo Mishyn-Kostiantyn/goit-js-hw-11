@@ -15,6 +15,13 @@ function showWarningMessage() {
     position: 'topCenter',
     });
 };
+function showWarningMessageForEmptyInput() {
+    iziToast.warning({
+        color: 'red',
+    message: 'YOU ALREADY GOT EMPTY IMAGE. IF YOU WANT SOMETHING ELSE - TYPE SOME WORD/WORDS, PLEASE!',
+    position: 'topCenter',
+    });
+};
 function showErrorMessage(error) {
   iziToast.error({
       timeout: 3000,
@@ -82,18 +89,23 @@ function onFormSubmit(event) {
   deleteImageGalleryMarkup();
   ref.containerForLoaderSign.classList.remove('hide');
     let searchingTheme = event.target.elements.query.value;
-     getImageGallery(searchingTheme).then(data => {
-    if (data.hits == 0) {
-      ref.containerForLoaderSign.classList.add('hide');
-      showWarningMessage();
-    }
-    else {
-      ref.containerForLoaderSign.classList.add('hide');
-      renderImageGallery(data.hits);
-    }
-  }).catch(error => { showErrorMessage(error); })
+  if (searchingTheme.trim() !== '') {
+    getImageGallery(searchingTheme).then(data => {
+      if (data.hits == 0) {
+        ref.containerForLoaderSign.classList.add('hide');
+        showWarningMessage();
+      }
+      else {
+        ref.containerForLoaderSign.classList.add('hide');
+        renderImageGallery(data.hits);
+      }
+    }).catch(error => { showErrorMessage(error); })
     
-  ref.formForInputSearchingParametersForImages.reset()
+    ref.formForInputSearchingParametersForImages.reset()
+  } else {
+    ref.containerForLoaderSign.classList.add('hide');
+    showWarningMessageForEmptyInput();
+  }
 };
 
 
